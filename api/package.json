@@ -1,0 +1,16 @@
+{
+  "name": "calamo-landing-api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Microservizio per il form beta della landing Calamo. Riceve email, salva in SQLite, gira su PM2 sul VPS.",
+  "scripts": {
+    "dev": "node server.cjs",
+    "start": "node server.cjs"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.5.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "express-rate-limit": "^7.4.1"
+  }
+}

@@ -1,0 +1,21 @@
+node_modules/
+.next/
+out/
+.env*.local
+.env.production.local
+
+# API data
+api/beta-signups.db
+api/beta-signups.db-shm
+api/beta-signups.db-wal
+api/node_modules/
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.tmp
+
+# OS
+.DS_Store
+Thumbs.db
