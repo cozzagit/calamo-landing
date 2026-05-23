@@ -19,12 +19,12 @@ pnpm dev                # http://localhost:4321
 # API beta (in altro terminale)
 cd api
 pnpm install
-node server.cjs         # http://localhost:3050
+node server.cjs         # http://localhost:3060
 ```
 
-Per testare il form localmente serve un proxy `/api/*` verso `:3050`.
+Per testare il form localmente serve un proxy `/api/*` verso `:3060`.
 Next.js dev server lo fa via `next.config` rewrites se necessario, oppure
-chiama direttamente `http://localhost:3050/api/signup` da una build di
+chiama direttamente `http://localhost:3060/api/signup` da una build di
 prova.
 
 ## Build statico
@@ -81,7 +81,7 @@ Lo script:
 ```
 calamo.vibecanyon.com (nginx 443)
 ├── /         -> static files /var/www/calamo-landing/out/
-└── /api/*    -> proxy_pass http://127.0.0.1:3050/
+└── /api/*    -> proxy_pass http://127.0.0.1:3060/
                             ▲
                             └─ calamo-api (PM2, Express)
                                └─ beta-signups.db (SQLite locale)

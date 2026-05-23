@@ -4,11 +4,13 @@ out/
 .env*.local
 .env.production.local
 
-# API data
+# API data + secrets
 api/beta-signups.db
 api/beta-signups.db-shm
 api/beta-signups.db-wal
 api/node_modules/
+api/.env
+api/.env.local
 
 # Editor
 .vscode/

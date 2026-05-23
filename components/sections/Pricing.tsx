@@ -41,7 +41,9 @@ export function Pricing() {
               <Inc>Beta Reader · Spinoff Engine · Coherence Check</Inc>
               <Inc>Interventi d'autore con cascade e revert</Inc>
               <Inc>Export PDF impaginato + EPUB 3 per KDP/Apple/Kobo</Inc>
-              <Inc>Provider Claude + provider Combinato (Writer + Editor)</Inc>
+              <Inc>
+                <strong>Tutti i provider AI inclusi</strong> · Claude · GPT-5 · Combinato (Writer + Editor)
+              </Inc>
               <Inc>Tutto locale, niente cloud, backup automatici</Inc>
               <Inc>Aggiornamenti gratuiti per la versione major corrente</Inc>
             </ul>
@@ -55,20 +57,48 @@ export function Pricing() {
             </p>
           </article>
 
-          <div className="mt-8 rounded-lg border border-brass/30 bg-brass/8 px-5 py-4">
-            <p className="text-[12px] uppercase tracking-[0.12em] text-leather/80 font-sans font-medium mb-1.5">
-              Add-on opzionale
+          <div className="mt-8 rounded-lg border-2 border-brass/50 bg-brass/12 px-5 py-4">
+            <p className="text-[12px] uppercase tracking-[0.12em] text-leather font-sans font-medium mb-2 flex items-center gap-2">
+              <span>⚠</span>
+              Cosa serve <em className="text-leather/70 normal-case tracking-normal">oltre</em> a Calamo
             </p>
-            <p className="text-[14px] text-ink/80 leading-relaxed">
-              <strong>+€ 19</strong> per attivare il provider OpenAI (GPT-5) +
-              modalità Combinato Writer + Editor. Acquistabile in qualsiasi
-              momento, mai obbligatorio.
+            <p className="text-[14px] text-ink/85 leading-relaxed">
+              Per usare le funzioni AI serve <strong>almeno una</strong> tra
+              Anthropic Claude API e OpenAI API, con un piano attivo. Non
+              forniamo le chiavi noi: le ottieni direttamente dai provider e
+              le incolli una volta nelle Impostazioni — restano sul tuo
+              computer, Calamo non le vede mai.
             </p>
+            <div className="grid grid-cols-2 gap-3 mt-3 text-[13px]">
+              <a
+                href="https://console.anthropic.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded border border-leather/20 bg-paper px-3 py-2 hover:border-leather/50 transition-colors"
+              >
+                <span className="block text-[10px] uppercase tracking-wider text-leather/70 font-sans">
+                  Anthropic
+                </span>
+                <span className="text-leather">console.anthropic.com →</span>
+              </a>
+              <a
+                href="https://platform.openai.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded border border-leather/20 bg-paper px-3 py-2 hover:border-leather/50 transition-colors"
+              >
+                <span className="block text-[10px] uppercase tracking-wider text-leather/70 font-sans">
+                  OpenAI
+                </span>
+                <span className="text-leather">platform.openai.com →</span>
+              </a>
+            </div>
           </div>
 
           <p className="text-center text-xs text-ink/45 mt-6 max-w-md mx-auto font-sans italic">
-            I costi delle API (Anthropic, OpenAI) sono separati e fatturati
-            direttamente dal provider. Per un romanzo medio: ~€ 5–15 in token.
+            I costi delle API sono separati e fatturati direttamente dal
+            provider. Per un romanzo medio: ~€ 5–15 in token con Claude o
+            GPT-5 singoli, ~€ 12–35 in modalità Combinata (Writer + Editor).
           </p>
         </div>
       </div>
