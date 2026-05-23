@@ -40,7 +40,7 @@ export function WhatItIs() {
 
         <div className="grid md:grid-cols-2 gap-x-12 gap-y-4 max-w-4xl mx-auto reveal">
           <FactLine label="Provider AI" value="Claude o GPT-5 (almeno uno richiesto) · entrambi insieme = Writer + Editor" />
-          <FactLine label="Tipi di opera" value="10 (romanzo, racconto, poesia, sceneggiatura, manuale, memoir…)" />
+          <FactLine label="Tipi di opera" value="Romanzo · Racconto · Raccolta racconti · Poesia · Raccolta poesie · Memoir · Saggio · Manuale · Sceneggiatura · Libro per bambini" />
           <FactLine label="Export" value="PDF impaginato (Paged.js) · EPUB 3 (Amazon KDP, Apple Books, Kobo)" />
           <FactLine label="Privacy" value="Tutto locale · niente account · niente telemetria · backup automatici" />
           <FactLine label="Piattaforme" value="Windows · macOS (Linux in roadmap)" />

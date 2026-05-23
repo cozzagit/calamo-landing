@@ -6,6 +6,7 @@ import { Hero } from "@/components/sections/Hero";
 import { WhatItIs } from "@/components/sections/WhatItIs";
 import { StoryBible } from "@/components/sections/StoryBible";
 import { Structure } from "@/components/sections/Structure";
+import { Maestro } from "@/components/sections/Maestro";
 import { ThreeMinds } from "@/components/sections/ThreeMinds";
 import { TwoAgents } from "@/components/sections/TwoAgents";
 import { ReviewTools } from "@/components/sections/ReviewTools";
@@ -44,6 +45,7 @@ export default function HomePage() {
         <WhatItIs />
         <StoryBible />
         <Structure />
+        <Maestro />
         <ThreeMinds />
         <TwoAgents />
         <ReviewTools />
