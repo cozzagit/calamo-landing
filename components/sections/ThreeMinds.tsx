@@ -5,7 +5,7 @@ export function ThreeMinds() {
         <div className="text-center max-w-3xl mx-auto reveal">
           <p className="eyebrow mb-3">Tre intelligenze · tre alla pari</p>
           <h2 className="font-serif text-4xl md:text-6xl tracking-tightest leading-tight text-ink">
-            Scegli <em className="text-leather">a colpo</em>,
+            Scegli <em className="text-leather">d'istinto</em>,
             <br />
             cambia <em className="text-leather">a piacere</em>.
           </h2>
