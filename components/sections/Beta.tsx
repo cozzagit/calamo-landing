@@ -51,7 +51,7 @@ export function Beta() {
             Entra <em className="text-brass-light">prima degli altri</em>.
           </h2>
           <p className="font-serif italic text-xl text-paper/75 mt-6 leading-relaxed">
-            I primi 200 beta tester ricevono Calamo gratuitamente. In cambio
+            I primi 50 beta tester ricevono Calamo gratuitamente. In cambio
             chiediamo solo feedback onesti sulla scrittura.
           </p>
         </div>

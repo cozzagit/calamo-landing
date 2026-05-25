@@ -52,7 +52,7 @@ export function Pricing() {
               Entra nella beta gratuita
             </a>
             <p className="text-center text-xs text-ink/50 mt-3 font-sans italic">
-              I primi 200 beta tester avranno accesso a vita all'aggiornamento
+              I primi 50 beta tester avranno accesso a vita all'aggiornamento
               v1.0
             </p>
           </article>

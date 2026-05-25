@@ -66,7 +66,7 @@ export function Hero() {
             className="mt-6 text-xs text-ink/50 tracking-wide font-sans animate-fade-up"
             style={{ animationDelay: "0.9s" }}
           >
-            Lista d'attesa aperta · accesso anticipato gratuito per i primi 200
+            Lista d'attesa aperta · accesso anticipato gratuito per i primi 50
           </p>
         </div>
 
