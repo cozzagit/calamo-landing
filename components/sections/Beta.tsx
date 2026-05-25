@@ -7,6 +7,7 @@ const API_ENDPOINT = "/api/signup";
 export function Beta() {
   const [email, setEmail] = useState("");
   const [profile, setProfile] = useState<string>("");
+  const [os, setOs] = useState<string>("");
   const [state, setState] = useState<"idle" | "loading" | "success" | "error">(
     "idle",
   );
@@ -20,7 +21,7 @@ export function Beta() {
       const res = await fetch(API_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.trim(), profile }),
+        body: JSON.stringify({ email: email.trim(), profile, os }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -114,6 +115,30 @@ export function Beta() {
               </select>
             </div>
 
+            <div>
+              <label
+                htmlFor="beta-os"
+                className="block text-[11px] uppercase tracking-[0.15em] text-paper/60 mb-2 font-sans"
+              >
+                Sistema operativo
+              </label>
+              <select
+                id="beta-os"
+                required
+                value={os}
+                onChange={(e) => setOs(e.target.value)}
+                className="w-full px-4 py-3 rounded-md bg-paper/8 border border-paper/20 text-paper focus:outline-none focus:border-brass-light transition-colors"
+              >
+                <option value="">— seleziona il tuo OS —</option>
+                <option value="windows">Windows 10 / 11</option>
+                <option value="macos">macOS (Intel o Apple Silicon)</option>
+                <option value="both">Entrambi (li userò su più macchine)</option>
+              </select>
+              <p className="text-[10.5px] text-paper/50 mt-1.5 font-sans italic">
+                Ci serve per mandarti l'installer giusto.
+              </p>
+            </div>
+
             {state === "error" && (
               <p className="text-sm text-brass-light bg-redmark/20 border border-brass-light/40 px-4 py-2 rounded">
                 {errorMsg}
@@ -122,7 +147,7 @@ export function Beta() {
 
             <button
               type="submit"
-              disabled={state === "loading" || !email}
+              disabled={state === "loading" || !email || !os}
               className="w-full inline-flex items-center justify-center gap-2 rounded-md bg-brass-light text-leather-deep px-6 py-3.5 font-medium tracking-wide transition-colors hover:bg-paper disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {state === "loading" ? "Salvataggio…" : "Mettimi in lista"}

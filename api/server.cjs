@@ -76,8 +76,18 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS idx_beta_created ON beta_signup(created_at);
 `);
 
+// Migrazione idempotente: aggiunge la colonna `os` se manca (DB esistenti).
+const hasOsColumn = db
+  .prepare("PRAGMA table_info(beta_signup)")
+  .all()
+  .some((col) => col.name === "os");
+if (!hasOsColumn) {
+  db.exec("ALTER TABLE beta_signup ADD COLUMN os TEXT");
+  console.log("[calamo-api] migrated: added beta_signup.os");
+}
+
 const insertStmt = db.prepare(
-  "INSERT INTO beta_signup (email, profile, user_agent, ip) VALUES (?, ?, ?, ?)",
+  "INSERT INTO beta_signup (email, profile, os, user_agent, ip) VALUES (?, ?, ?, ?, ?)",
 );
 
 // ---------------------------------------------------------------------------
@@ -115,6 +125,13 @@ const PROFILE_LABEL = {
   aspirant: "Non ancora pubblicato",
 };
 
+const VALID_OS = ["windows", "macos", "both"];
+const OS_LABEL = {
+  windows: "Windows 10/11",
+  macos: "macOS (Intel/Apple Silicon)",
+  both: "Entrambi (Windows + macOS)",
+};
+
 // ---------------------------------------------------------------------------
 // Email senders — non-bloccanti. Se SMTP non risponde, l'iscrizione e' gia'
 // salvata nel DB e l'utente riceve comunque la conferma sulla UI.
@@ -122,17 +139,19 @@ const PROFILE_LABEL = {
 
 async function notifyAdmin(signup) {
   if (!transporter) return;
-  const { email, profile, ip, user_agent, total } = signup;
+  const { email, profile, os, ip, user_agent, total } = signup;
   const profileLabel = profile ? PROFILE_LABEL[profile] || profile : "—";
+  const osLabel = os ? OS_LABEL[os] || os : "—";
   try {
     await transporter.sendMail({
       from: SMTP_FROM,
       to: NOTIFICATION_TO,
-      subject: `Calamo · nuovo iscritto beta (#${total}): ${email}`,
+      subject: `Calamo · nuovo iscritto beta (#${total}): ${email} [${osLabel}]`,
       text: [
         `Nuova iscrizione alla beta privata di Calamo.`,
         ``,
         `Email:        ${email}`,
+        `OS:           ${osLabel}`,
         `Profilo:      ${profileLabel}`,
         `Iscritto n°:  ${total}`,
         `IP:           ${ip || "—"}`,
@@ -148,6 +167,7 @@ async function notifyAdmin(signup) {
           <p>Un nuovo autore si è messo in lista d'attesa.</p>
           <table style="border-collapse: collapse; margin: 1.5em 0;">
             <tr><td style="padding: 6px 12px 6px 0; color: #7a6448; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;">Email</td><td style="padding: 6px 0;"><a href="mailto:${email}">${email}</a></td></tr>
+            <tr><td style="padding: 6px 12px 6px 0; color: #7a6448; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;">OS</td><td style="padding: 6px 0;"><strong>${osLabel}</strong></td></tr>
             <tr><td style="padding: 6px 12px 6px 0; color: #7a6448; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;">Cosa scrive</td><td style="padding: 6px 0;">${profileLabel}</td></tr>
             <tr><td style="padding: 6px 12px 6px 0; color: #7a6448; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;">Iscritto n°</td><td style="padding: 6px 0;"><strong>${total}</strong></td></tr>
             <tr><td style="padding: 6px 12px 6px 0; color: #7a6448; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;">IP</td><td style="padding: 6px 0; font-family: monospace; font-size: 12px;">${ip || "—"}</td></tr>
@@ -191,7 +211,7 @@ async function sendUserConfirmation(email, profile) {
         `(Claude) e un editor (GPT-5) — in un pipeline di revisione che`,
         `nessuno ha mai provato a fare prima per la prosa letteraria.`,
         ``,
-        `I primi 200 iscritti avranno accesso anticipato e licenza a vita`,
+        `I primi 50 iscritti avranno accesso anticipato e licenza a vita`,
         `gratuita per la v1.0.`,
         ``,
         `A presto,`,
@@ -225,7 +245,7 @@ async function sendUserConfirmation(email, profile) {
           letteraria.</p>
 
           <p style="background: #f5f1e8; border-left: 3px solid #b89968; padding: 16px 20px; margin: 24px 0;">
-            <strong>I primi 200 iscritti</strong> avranno accesso anticipato e
+            <strong>I primi 50 iscritti</strong> avranno accesso anticipato e
             <strong>licenza a vita gratuita</strong> per la v1.0.
           </p>
 
@@ -290,7 +310,7 @@ app.get("/api/stats", (_req, res) => {
 });
 
 app.post("/api/signup", signupLimiter, (req, res) => {
-  const { email, profile } = req.body || {};
+  const { email, profile, os } = req.body || {};
 
   if (!isValidEmail(email)) {
     return res
@@ -302,6 +322,8 @@ app.post("/api/signup", signupLimiter, (req, res) => {
     typeof profile === "string" && VALID_PROFILES.includes(profile)
       ? profile
       : null;
+  const cleanOs =
+    typeof os === "string" && VALID_OS.includes(os) ? os : null;
 
   const ua = req.headers["user-agent"] || null;
   const ip =
@@ -311,7 +333,7 @@ app.post("/api/signup", signupLimiter, (req, res) => {
 
   const emailNorm = email.trim().toLowerCase();
   try {
-    insertStmt.run(emailNorm, cleanProfile, ua, ip);
+    insertStmt.run(emailNorm, cleanProfile, cleanOs, ua, ip);
     res.status(201).json({ ok: true });
 
     // Email non-bloccanti: la risposta HTTP e' gia' partita.
@@ -319,6 +341,7 @@ app.post("/api/signup", signupLimiter, (req, res) => {
     notifyAdmin({
       email: emailNorm,
       profile: cleanProfile,
+      os: cleanOs,
       ip,
       user_agent: ua,
       total,
