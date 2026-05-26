@@ -85,7 +85,7 @@ export function Beta() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="tu@email.it"
-                className="w-full px-4 py-3 rounded-md bg-paper/8 border border-paper/20 text-paper placeholder:text-paper/40 focus:outline-none focus:border-brass-light focus:bg-paper/12 transition-colors"
+                className="w-full px-4 py-3 rounded-md bg-paper/8 border border-paper/20 text-paper placeholder:text-paper/55 focus:outline-none focus:border-brass-light focus:bg-paper/12 transition-colors"
               />
             </div>
 
@@ -100,18 +100,18 @@ export function Beta() {
                 id="beta-profile"
                 value={profile}
                 onChange={(e) => setProfile(e.target.value)}
-                className="w-full px-4 py-3 rounded-md bg-paper/8 border border-paper/20 text-paper focus:outline-none focus:border-brass-light transition-colors"
+                className="w-full px-4 py-3 rounded-md bg-paper/8 border border-paper/20 text-paper focus:outline-none focus:border-brass-light transition-colors [&>option]:text-ink [&>option]:bg-paper"
               >
-                <option value="">— preferisco non dirlo —</option>
-                <option value="novel">Romanzi</option>
-                <option value="short-story">Racconti</option>
-                <option value="poetry">Poesia</option>
-                <option value="memoir">Memoir / Autobiografia</option>
-                <option value="essay">Saggistica</option>
-                <option value="screenplay">Sceneggiatura / Teatro</option>
-                <option value="children-book">Libri per bambini</option>
-                <option value="multi">Un po' di tutto</option>
-                <option value="aspirant">Non ancora pubblicato, ma ci provo</option>
+                <option value="" className="text-ink bg-paper">— preferisco non dirlo —</option>
+                <option value="novel" className="text-ink bg-paper">Romanzi</option>
+                <option value="short-story" className="text-ink bg-paper">Racconti</option>
+                <option value="poetry" className="text-ink bg-paper">Poesia</option>
+                <option value="memoir" className="text-ink bg-paper">Memoir / Autobiografia</option>
+                <option value="essay" className="text-ink bg-paper">Saggistica</option>
+                <option value="screenplay" className="text-ink bg-paper">Sceneggiatura / Teatro</option>
+                <option value="children-book" className="text-ink bg-paper">Libri per bambini</option>
+                <option value="multi" className="text-ink bg-paper">Un po' di tutto</option>
+                <option value="aspirant" className="text-ink bg-paper">Non ancora pubblicato, ma ci provo</option>
               </select>
             </div>
 
@@ -127,12 +127,12 @@ export function Beta() {
                 required
                 value={os}
                 onChange={(e) => setOs(e.target.value)}
-                className="w-full px-4 py-3 rounded-md bg-paper/8 border border-paper/20 text-paper focus:outline-none focus:border-brass-light transition-colors"
+                className="w-full px-4 py-3 rounded-md bg-paper/8 border border-paper/20 text-paper focus:outline-none focus:border-brass-light transition-colors [&>option]:text-ink [&>option]:bg-paper"
               >
-                <option value="">— seleziona il tuo OS —</option>
-                <option value="windows">Windows 10 / 11</option>
-                <option value="macos">macOS (Intel o Apple Silicon)</option>
-                <option value="both">Entrambi (li userò su più macchine)</option>
+                <option value="" className="text-ink bg-paper">— seleziona il tuo OS —</option>
+                <option value="windows" className="text-ink bg-paper">Windows 10 / 11</option>
+                <option value="macos" className="text-ink bg-paper">macOS (Intel o Apple Silicon)</option>
+                <option value="both" className="text-ink bg-paper">Entrambi (li userò su più macchine)</option>
               </select>
               <p className="text-[10.5px] text-paper/50 mt-1.5 font-sans italic">
                 Ci serve per mandarti l'installer giusto.
