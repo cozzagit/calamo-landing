@@ -85,7 +85,7 @@ export function Beta() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="tu@email.it"
-                className="w-full px-4 py-3 rounded-md bg-paper/8 border border-paper/20 text-paper placeholder:text-paper/55 focus:outline-none focus:border-brass-light focus:bg-paper/12 transition-colors"
+                className="w-full px-4 py-3 rounded-md bg-paper border border-paper/20 text-ink placeholder:text-ink/45 focus:outline-none focus:border-brass-light transition-colors"
               />
             </div>
 
@@ -100,7 +100,7 @@ export function Beta() {
                 id="beta-profile"
                 value={profile}
                 onChange={(e) => setProfile(e.target.value)}
-                className="w-full px-4 py-3 rounded-md bg-paper/8 border border-paper/20 text-paper focus:outline-none focus:border-brass-light transition-colors [&>option]:text-ink [&>option]:bg-paper"
+                className="w-full px-4 py-3 rounded-md bg-paper border border-paper/20 text-ink focus:outline-none focus:border-brass-light transition-colors [&>option]:text-ink [&>option]:bg-paper"
               >
                 <option value="" className="text-ink bg-paper">— preferisco non dirlo —</option>
                 <option value="novel" className="text-ink bg-paper">Romanzi</option>
@@ -127,7 +127,7 @@ export function Beta() {
                 required
                 value={os}
                 onChange={(e) => setOs(e.target.value)}
-                className="w-full px-4 py-3 rounded-md bg-paper/8 border border-paper/20 text-paper focus:outline-none focus:border-brass-light transition-colors [&>option]:text-ink [&>option]:bg-paper"
+                className="w-full px-4 py-3 rounded-md bg-paper border border-paper/20 text-ink focus:outline-none focus:border-brass-light transition-colors [&>option]:text-ink [&>option]:bg-paper"
               >
                 <option value="" className="text-ink bg-paper">— seleziona il tuo OS —</option>
                 <option value="windows" className="text-ink bg-paper">Windows 10 / 11</option>
